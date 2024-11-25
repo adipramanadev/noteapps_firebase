@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "888913087795",
+    "project_id": "notepp-1b4f6",
+    "storage_bucket": "notepp-1b4f6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888913087795:android:f1afa2720a08c3d2bec246",
+        "android_client_info": {
+          "package_name": "com.example.myapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKSSBFw-nyp28B3RQZfTF-oiYLOHRARpM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
