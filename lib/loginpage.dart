@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
         password: _passwordController.text.trim(),
       );
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text(
             'Register berhasil',
           ),
@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.redAccent,
-        title: Text("Login Page"),
+        title: const Text("Login Page"),
         centerTitle: true,
       ),
       body: Padding(
@@ -85,21 +85,21 @@ class _LoginPageState extends State<LoginPage> {
               decoration: const InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
             ElevatedButton(
               onPressed: () {
                 _login();
               },
-              child: Text('Login'),
+              child: const Text('Login'),
             ),
             ElevatedButton(
               onPressed: () {
                 //register
                 register();
               },
-              child: Text('Register'),
+              child: const Text('Register'),
             ),
           ],
         ),
