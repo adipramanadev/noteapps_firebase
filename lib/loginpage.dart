@@ -6,72 +6,62 @@ class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
-  //fungsi untuk login
   Future<void> _login() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
-      //jika berhasil login
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
+        MaterialPageRoute(builder: (_) => HomePage()),
       );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            e.toString(),
-          ),
-        ),
-      );
+    } on FirebaseAuthException catch (e) {
+      _showErrorDialog(e.message ?? 'Terjadi kesalahan saat login');
     }
   }
 
-  //fungsi untuk register
-  Future<void> register() async {
+  Future<void> _register() async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'Register berhasil',
-          ),
-        ),
+        const SnackBar(content: Text('Registrasi berhasil, silakan login!')),
       );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            e.toString(),
-          ),
-        ),
-      );
+    } on FirebaseAuthException catch (e) {
+      _showErrorDialog(e.message ?? 'Terjadi kesalahan saat registrasi');
     }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Error'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.redAccent,
-        title: const Text("Login Page"),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Login')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -85,21 +75,14 @@ class _LoginPageState extends State<LoginPage> {
               decoration: const InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
-            const SizedBox(
-              height: 20.0,
-            ),
+            const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                _login();
-              },
+              onPressed: _login,
               child: const Text('Login'),
             ),
-            ElevatedButton(
-              onPressed: () {
-                //register
-                register();
-              },
-              child: const Text('Register'),
+            TextButton(
+              onPressed: _register,
+              child: const Text('Belum punya akun? Daftar'),
             ),
           ],
         ),
