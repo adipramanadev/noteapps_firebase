@@ -59,7 +59,13 @@ class _AddNotePageState extends State<AddNotePage> {
             ),
             ElevatedButton(
               onPressed: () {
-                _addNote();
+                if (_noteController.text.isNotEmpty) {
+                  _addNote(_noteController.text.trim());
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Catatan Kosong')),
+                  );
+                }
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => HomePage(),
