@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:myapp/loginpage.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -20,11 +22,11 @@ class _HomePageState extends State<HomePage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (_) => LoginPage(),
+            builder: (_) => const LoginPage(),
           ),
         );
       });
-      return Scaffold(
+      return const Scaffold(
         body: Center(
           child: Text('Silahkan Login Dahulu'),
         ),
@@ -43,7 +45,7 @@ class _HomePageState extends State<HomePage> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => LoginPage(),
+                  builder: (_) => const LoginPage(),
                 ),
               );
             },
@@ -53,7 +55,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blueAccent,
         onPressed: () {},
-        child: Icon(
+        child: const Icon(
           Icons.add,
           color: Colors.white,
         ),
@@ -66,7 +68,7 @@ class _HomePageState extends State<HomePage> {
             //welcome section
             Text(
               'Halo ${user!.email ?? "Pengguna"}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
               ),
