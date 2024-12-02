@@ -20,7 +20,7 @@ class _AddNotePageState extends State<AddNotePage> {
       print('User Belum Login');
       return;
     }
-    final String uid = user!.uid;
+    final String uid = user.uid;
     try {
       await FirebaseFirestore.instance.collection('notes').add({
         'content': _noteController.text,
