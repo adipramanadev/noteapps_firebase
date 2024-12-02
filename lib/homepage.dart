@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:myapp/addpage.dart';
 import 'package:myapp/loginpage.dart';
 
 class HomePage extends StatefulWidget {
@@ -57,6 +58,12 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.blueAccent,
         onPressed: () {
           // Tambahkan navigasi ke halaman tambah catatan
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => AddNotePage(),
+            ),
+          );
         },
         child: const Icon(Icons.add, color: Colors.white),
       ),
@@ -76,7 +83,7 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
-                    .collection('note')
+                    .collection('notes')
                     .where('userId', isEqualTo: user?.uid)
                     .orderBy('timestamp', descending: true)
                     .snapshots(),
